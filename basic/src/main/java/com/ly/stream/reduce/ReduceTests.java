@@ -1,12 +1,13 @@
 package com.ly.stream.reduce;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 /**
  * liyang 2021-03-15
  * reduce是将传入一组值，根据计算模型输出一个值。例如求一组值的最大值、最小值、和等等。
+ *
+ * 参考资料：https://www.cnblogs.com/yulinfeng/p/12561664.html
  */
 public class ReduceTests {
 
