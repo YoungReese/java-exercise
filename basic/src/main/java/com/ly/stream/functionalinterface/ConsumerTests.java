@@ -43,6 +43,7 @@ public class ConsumerTests {
 
         /**
          * 实际应用测试
+         * 参考资料：https://www.jianshu.com/p/0b955173045e
          */
         List<Person> lisiList = new ArrayList<>();
         Consumer <Person> consumer2  =  x -> {
@@ -54,6 +55,7 @@ public class ConsumerTests {
 
         /**
          * 循环遍历每一个对象，先调用 accept 、然后调用 after 进行处理
+         * 将给定的一批用户里面的名称为"lisi"且年龄大于22岁的用户都给打包起来
          */
         consumer2 = consumer2.andThen(
                 x -> {
