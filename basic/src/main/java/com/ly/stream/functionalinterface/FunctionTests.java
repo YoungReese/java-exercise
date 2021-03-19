@@ -81,7 +81,10 @@ public class FunctionTests {
          *
          * 参考资料：https://www.jianshu.com/p/cd694d2d8be5
          */
-        System.out.println(Function.identity());
+        Function<Integer, Integer> identity = Function.identity(); // 返回 Function 实例
+        System.out.println(identity);
+        Integer apply = identity.apply(2021);                   // 返回 2021
+        System.out.println(apply);
 
     }
 }
@@ -115,6 +118,7 @@ public class FunctionTests {
 //
 //    /**
 //     * 返回一个执行了apply()方法之后只会返回输入参数的函数对象。
+//     * 相当于重写apply方法，输入什么，原样返回
 //     */
 //    static <T> Function<T, T> identity() {
 //        return t -> t;
