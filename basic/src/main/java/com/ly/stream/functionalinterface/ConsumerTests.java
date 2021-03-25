@@ -35,8 +35,16 @@ public class ConsumerTests {
         /**
          * execute => consumerLambda: consumed 2022
          * execute => consumer: consumed 2022
+         *
+         * consumerLambda.andThen(consumer).accept(2022);  <=> consumerLambda.accept(2022); + consumer.accept(2022);
+         *
+         * default Consumer<T> andThen(Consumer<? super T> after) =>
+         * Returns a composed {@code Consumer} that performs, in sequence, this
+         * operation followed by the {@code after} operation.
          */
-        consumerLambda.andThen(consumer).accept(2022);
+//        consumerLambda.andThen(consumer).accept(2022); // equals the two statements below
+        Consumer<Integer> integerConsumer = consumerLambda.andThen(consumer);
+        integerConsumer.accept(2022);
         System.out.println(" ");
 
 
