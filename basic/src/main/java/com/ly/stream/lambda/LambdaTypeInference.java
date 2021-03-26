@@ -40,7 +40,6 @@ public class LambdaTypeInference {
 
         /**
          * 使用方法引用简化
-         * 使用 "-" 合并成一个字符串
          *
          * 例如：
          *     Consumer<String> consumer = (s) -> System.out.println(s);
@@ -63,7 +62,15 @@ public class LambdaTypeInference {
          *
          */
         Stream<String> stringStream2 = students.stream().map(Student::getName);
-        System.out.println(stringStream2.collect(Collectors.joining("-")));
+        System.out.println(stringStream2.collect(Collectors.joining("-"))); // 使用 "-" 合并成一个字符串
+
+
+        /**
+         * 通过特性对象的方法引用
+         */
+        final Student stu = new Student();
+        Stream<String> stringStream3 = students.stream().map(stu::hello);
+        System.out.println(stringStream3.collect(Collectors.joining("-"))); // 使用 "-" 合并成一个字符串
     }
 
 
@@ -73,5 +80,8 @@ public class LambdaTypeInference {
     private static class Student {
         private Integer age;
         private String name;
+        public String hello(Student student) {
+            return "hello";
+        }
     }
 }
