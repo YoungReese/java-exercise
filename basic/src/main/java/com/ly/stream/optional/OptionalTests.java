@@ -110,5 +110,15 @@ public class OptionalTests {
         System.out.println(a.flatMap(s -> Optional.ofNullable("hi => flatMap")).orElse("hi => flatMap - orElse"));
         System.out.println(b.flatMap(s -> Optional.ofNullable("hi => flatMap")).orElse("hi => flatMap - orElse"));
 
+
+        /**
+         * public <X extends Throwable> T orElseThrow(Supplier<? extends X> exceptionSupplier) throws X
+         *
+         * Return the contained value, if present, otherwise throw an exception
+         * to be created by the provided supplier.
+         */
+        System.out.println(b.orElseThrow(() -> new RuntimeException("UNKNOWN")));
+        System.out.println(a.orElseThrow(() -> new RuntimeException("UNKNOWN")));
+
     }
 }
