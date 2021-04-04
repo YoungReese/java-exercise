@@ -5,7 +5,7 @@ import java.util.stream.Stream;
 /**
  * liyang 2021-04-04
  *
- * 使用 iterator 创建无限流
+ * 使用 iterate 创建无限流
  */
 public class IterateTests {
     public static void main(String[] args) {
