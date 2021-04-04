@@ -48,5 +48,16 @@ public class CollectorsTests {
         IntSummaryStatistics listStatistics = list.stream().collect(summarizingInt(x -> x));
         System.out.println(listStatistics);
 
+
+        /**
+         * 使用收集器的 reducing 方法 => 这方法是 Collectors.class 中的静态方法，不要和 Stream.class 中的函数混淆
+         *
+         * 第1个参数：起始值
+         * 第2个参数：映射函数
+         * 第3个参数：操作函数
+         */
+        int total = list.stream().collect(reducing(0, x -> x, (i, j) -> i + j));
+        System.out.println(total);
+
     }
 }
