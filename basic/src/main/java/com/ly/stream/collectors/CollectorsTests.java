@@ -1,5 +1,8 @@
 package com.ly.stream.collectors;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
 import java.util.*;
 
 import static java.util.stream.Collectors.*;
@@ -73,5 +76,54 @@ public class CollectorsTests {
                 .collect(reducing((x, y) -> x + y));
         System.out.println(totalSum.orElse(Integer.MIN_VALUE));
 
+
+
+        /********************** 分割线 ************************/
+        /**
+         * 创建初始化菜单
+         */
+        List<Dish> menu = new ArrayList<>();
+        menu.add(new Dish("Fish", 300));
+        menu.add(new Dish("Beef", 900));
+        menu.add(new Dish("Chicken", 600));
+        menu.add(new Dish("Pizza", 700));
+        menu.add(new Dish("Bread", 200));
+
+
+        /**
+         * 使用用 groupBy 根据分组规则进行分组
+         */
+        Map<CaloricLevel, List<Dish>> dishesByCaloricLevel = menu.stream().collect( groupingBy(dish -> {
+            if (dish.getCalories() <= 500) return CaloricLevel.DIET;
+            else if (dish.getCalories() <= 700) return CaloricLevel.NORMAL;
+            else return CaloricLevel.FAT;
+        } ));
+        System.out.println(dishesByCaloricLevel);
+
+    }
+
+    enum CaloricLevel {
+        DIET("diet", "diet"), NORMAL("normal", "normal"), FAT("fat", "fat");
+        private String name;
+        private String desc;
+        CaloricLevel(String name, String desc) {
+            System.out.println("initialize a enum instance");
+            this.name = name;
+            this.desc = desc;
+        }
+        public String getName() {
+            return name;
+        }
+        public String getDesc() {
+            return desc;
+        }
+    }
+
+    @Data
+    @AllArgsConstructor
+    static
+    class Dish {
+        private String name;
+        private int calories;
     }
 }
