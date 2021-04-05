@@ -59,5 +59,19 @@ public class CollectorsTests {
         int total = list.stream().collect(reducing(0, x -> x, (i, j) -> i + j));
         System.out.println(total);
 
+
+        /**
+         * Returns a {@code Collector} which performs a reduction of its
+         * input elements under a specified {@code BinaryOperator}.  The result
+         * is described as an {@code Optional<T>}.
+         *
+         * public static <T> Collector<T, ?, Optional<T>> reducing(BinaryOperator<T> op)
+         *
+         * 与上一个不同之处在于，这里返回的是 Optional<Integer>
+         */
+        Optional<Integer> totalSum= list.stream()
+                .collect(reducing((x, y) -> x + y));
+        System.out.println(totalSum.orElse(Integer.MIN_VALUE));
+
     }
 }
