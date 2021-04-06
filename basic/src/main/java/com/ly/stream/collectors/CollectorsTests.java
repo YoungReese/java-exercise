@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.*;
 
@@ -91,7 +93,7 @@ public class CollectorsTests {
 
 
         /**
-         * 使用用 groupBy 根据分组规则进行分组
+         * 使用用 groupBy 根据分组规则进行分组 （共有 3 个重载函数）
          */
         Map<CaloricLevel, List<Dish>> dishesByCaloricLevel = menu.stream().collect( groupingBy(dish -> {
             if (dish.getCalories() <= 500) return CaloricLevel.DIET;
@@ -100,7 +102,35 @@ public class CollectorsTests {
         } ));
         System.out.println(dishesByCaloricLevel);
 
+
+        /**
+         * 分区：分组的特殊情况
+         * 分区函数 partitioningBy 返回一个布尔值，这意味着得到的分组 Map 的键类型是 Boolean（ true 一组，false 一组 ）
+         * 分区的好处在于保留了分区函数返回 true 或 false 的两套流元素列表。
+         *
+         * partitioningBy 还有个重载该函数，传入指定的收集器（ 这个不传入则是使用默认收集器toList() => return partitioningBy(predicate, toList()); ）
+         */
+        Map<Boolean, List<Dish>> partitionedMenu = menu.stream().collect(partitioningBy((dish) -> dish.getCalories() > 600));
+        System.out.println(partitionedMenu);
+
+
+        /**
+         * 将给定范围的数字按质数和非质数分区
+         */
+        Map<Boolean, List<Integer>> partitionPrimes = partitionPrimes(10);
+        System.out.println(partitionPrimes);
     }
+
+    /**
+     * 实现将 [2, n] 按照质数和非质数分区
+     * @param n
+     * @return
+     */
+    public static Map<Boolean, List<Integer>> partitionPrimes(int n) {
+        return IntStream.rangeClosed(2,n).boxed().collect(partitioningBy(isPrime));
+    }
+    private static Predicate<Integer> isPrime = (candidate) -> IntStream.rangeClosed(2, (int) Math.sqrt((double) candidate)).noneMatch(i -> candidate % i == 0);
+
 
     enum CaloricLevel {
         DIET("diet", "diet"), NORMAL("normal", "normal"), FAT("fat", "fat");
