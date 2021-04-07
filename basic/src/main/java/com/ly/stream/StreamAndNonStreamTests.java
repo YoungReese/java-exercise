@@ -14,7 +14,7 @@ import static com.ly.stream.StreamTests.testUsingStream;
  * https://www.runoob.com/java/java8-streams.html
  * https://www.cnblogs.com/yulinfeng/p/12561664.html
  */
-public class StreamAndNonStreamTeats {
+public class StreamAndNonStreamTests {
 
     public static void main(String[] args) {
         List<String> strings = Arrays.asList("abc", "", "bc", "efg", "abcd", "", "jkl");
