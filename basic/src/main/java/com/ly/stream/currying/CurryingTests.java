@@ -11,7 +11,7 @@ import java.util.function.DoubleUnaryOperator;
  *
  * 高阶函数：
  * 1、接受至少一个函数作为参数
- * 2、返回的结果是一个函数
+ * 2、or 返回的结果是一个函数
  */
 public class CurryingTests {
 
