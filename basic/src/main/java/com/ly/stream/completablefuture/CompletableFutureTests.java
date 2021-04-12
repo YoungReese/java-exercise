@@ -15,7 +15,10 @@ import java.util.stream.Collectors;
  * 组合式异步编程
  * Completable Future 可以手工完成，应用场景可以是某个 api 服务提供方挂掉，可以服务降级，使用缓存数据手动完成任务，保证服务可用
  *
- * 参考资料：https://juejin.cn/post/6844903594165026829
+ * 参考资料：
+ * https://juejin.cn/post/6844903594165026829
+ * https://www.liaoxuefeng.com/wiki/1252599548343744/1306581182447650
+ *
  */
 public class CompletableFutureTests {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
@@ -125,6 +128,8 @@ public class CompletableFutureTests {
         // Attach a callback to the Future using thenApply()
         CompletableFuture<String> greetingFuture = whatsYourNameFuture.thenApply(name -> "Hello " + name);
         System.out.println(greetingFuture.get()); // Hello liyang
+        // or attach a callback to the Future using thenAccept()
+        whatsYourNameFuture.thenAccept(name -> System.out.println("Hello => " + name));
 
 
         /******************************* Round 6 ********************************/
@@ -428,10 +433,10 @@ public class CompletableFutureTests {
          */
         Integer age = -1;
         CompletableFuture<String> maturityFuture = CompletableFuture.supplyAsync(() -> {
-            if(age < 0) {
+            if (age < 0) {
                 throw new IllegalArgumentException("Age can not be negative");
             }
-            if(age > 18) {
+            if (age > 18) {
                 return "Adult";
             } else {
                 return "Child";
@@ -448,16 +453,16 @@ public class CompletableFutureTests {
          */
         Integer age2 = -1;
         CompletableFuture<String> maturityFuture2 = CompletableFuture.supplyAsync(() -> {
-            if(age2 < 0) {
+            if (age2 < 0) {
                 throw new IllegalArgumentException("Age can not be negative");
             }
-            if(age2 > 18) {
+            if (age2 > 18) {
                 return "Adult";
             } else {
                 return "Child";
             }
         }).handle((res, ex) -> { // 如果异常发生，res 参数将是 null，否则，ex 将是 null
-            if(ex != null) {
+            if (ex != null) {
                 System.out.println("Oops! We have an exception - " + ex.getMessage());
                 return "Unknown! => handle";
             }
