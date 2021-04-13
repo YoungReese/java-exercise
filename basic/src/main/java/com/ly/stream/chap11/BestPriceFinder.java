@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
@@ -20,13 +19,10 @@ public class BestPriceFinder {
             new Shop("BuyItAll"),
             new Shop("ShopEasy"));
 
-    private final Executor executor = Executors.newFixedThreadPool(shops.size(), new ThreadFactory() {
-        @Override
-        public Thread newThread(Runnable r) {
-            Thread t = new Thread(r);
-            t.setDaemon(true);
-            return t;
-        }
+    private final Executor executor = Executors.newFixedThreadPool(Math.min(shops.size(), 100), r -> {
+        Thread t = new Thread(r);
+        t.setDaemon(true); // 使用守护线程 -- 这种方式不会阻止程序的关停
+        return t;
     });
 
     /**
@@ -40,10 +36,10 @@ public class BestPriceFinder {
 
     public static void main(String[] args) {
         BestPriceFinder finder = new BestPriceFinder();
-        finder.testFindPrices();
+        finder.testFindPricesSequential();
     }
 
-    public void testFindPrices() {
+    public void testFindPricesSequential() {
         long start = System.nanoTime();
         System.out.println(findPricesSequential("iphone 12"));
         long duration = (System.nanoTime() - start) / 1_000_000;
