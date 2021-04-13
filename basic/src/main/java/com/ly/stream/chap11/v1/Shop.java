@@ -1,4 +1,4 @@
-package com.ly.stream.chap11;
+package com.ly.stream.chap11.v1;
 
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
