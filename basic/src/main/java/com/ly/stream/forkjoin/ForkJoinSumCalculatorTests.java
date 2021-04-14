@@ -47,6 +47,6 @@ public class ForkJoinSumCalculatorTests {
     private static long[] numbers = LongStream.rangeClosed(1, n).toArray();
     private static Function<Long, Long> adder = (n) -> { // 传入的 n 不使用，仅仅为了兼容之前的接口
         ForkJoinTask<Long> task = new ForkJoinSumCalculator(numbers);
-        return new ForkJoinPool().invoke(task);
+        return new ForkJoinPool().invoke(task); // Performs the given task, returning its result upon completion.
     };
 }
