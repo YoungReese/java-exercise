@@ -64,7 +64,7 @@ public class Skiplist {
         }
 
         Node p = head;
-        for (int i = level - 1; i >=0; i--) {
+        for (int i = level - 1; i >= 0; i--) {
             while (p.forward[i] != null && p.forward[i].data < num) {
                 p = p.forward[i];
             }
