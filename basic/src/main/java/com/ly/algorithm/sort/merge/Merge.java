@@ -31,7 +31,7 @@ public class Merge {
             mid = L + (RightEnd - L) / 2;
             mSort(arr, aux, L, mid);
             mSort(arr, aux, mid + 1, RightEnd);
-            merge(arr, aux, L, mid + 1,RightEnd);
+            merge(arr, aux, L, mid + 1, RightEnd);
         }
     }
 
