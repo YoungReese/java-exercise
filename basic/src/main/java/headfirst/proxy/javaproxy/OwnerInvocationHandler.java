@@ -13,6 +13,10 @@ public class OwnerInvocationHandler implements InvocationHandler {
 			throws IllegalAccessException {
   
 		try {
+			// 如果Object方法直接反射调用
+			if(Object.class.equals(method.getDeclaringClass())){
+				return method.invoke(this, args);
+			}
 			if (method.getName().startsWith("get")) {
 				return method.invoke(person, args);
    			} else if (method.getName().equals("setHotOrNotRating")) {
