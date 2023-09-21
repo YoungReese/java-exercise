@@ -25,12 +25,15 @@ public class MenuTestDrive {
 	 *      }
 	 * 		return iterator;
 	 *  }
-	 *  --- one menu should have just one iterator ---
-	 * ｜
-	 * ｜   Dessert-Itr  ｜
-	 * ｜   Dinner-Itr   ｜ -> Dessert-Itr0
-	 * ｜    all-Itr     ｜ -> Dinner-Itr0
-	 * ｜----------------｜
+	 *  -------- one menu should have just one iterator and one stack --------
+	 * <p>
+	 *   ｜                 ｜
+	 *   ｜                 ｜
+	 *   ｜   Dessert-Itr   ｜ -->  menuitem
+	 *   ｜   Dinner-Itr    ｜ -->  Dessert-Itr0 --> menuitem0
+	 *   ｜     All-Itr     ｜
+	 *   ｜-----------------｜
+	 * <p>
 	 * so Dessert-Itr and Dessert-Itr0 iterate the ele respectively !
 	 * <p>
 	 * VEGETARIAN MENU
